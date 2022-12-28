@@ -1,0 +1,22 @@
+name: "CloudThread ECR login action"
+description: "Performs ECR login"
+inputs:
+  cloudthread-token:
+    required: true
+    description: "The token to authenticate with CloudThread API endpoint"
+  api-root:
+    description: CloudThread API URL
+    required: false
+    default: "https://api.cloudthread.io/"
+  region:
+    description: Preferred AWS region (only us-west-2 is supported currently)
+    required: false
+    default: "us-west-2"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - --api-root
+    - ${{ inputs.api-root }}
+    - --region
+    - ${{ inputs.region }}
